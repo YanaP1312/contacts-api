@@ -3,7 +3,7 @@ import pino from 'pino-http';
 import cors from 'cors';
 import { getEnvVar } from './utils/getEnvVar.js';
 import { ENV_VARS } from './constants/env.js';
-import { ContactCollection } from './db/models/contacts.js';
+import { getContacts, getContactById } from './db/services/contacts.js';
 
 export const setupServer = () => {
   const app = express();
@@ -19,11 +19,47 @@ export const setupServer = () => {
   );
 
   app.get('/contacts', async (req, res) => {
-    const contacts = await ContactCollection.find();
-    res.json(contacts);
+    try {
+      const contacts = await getContacts();
+
+      return res.json({
+        status: 200,
+        message: 'Successfully found contacts!',
+        data: contacts,
+      });
+    } catch (err) {
+      res.status(500).json({
+        message: 'Something went wrong',
+        error: err.message,
+      });
+    }
   });
 
-  app.use('*', (req, res, next) => {
+  app.get('/contacts/:contactId', async (req, res) => {
+    try {
+      const { contactId } = req.params;
+      const contact = await getContactById(contactId);
+
+      if (!contact) {
+        return res.status(404).json({
+          message: 'Contact not found',
+        });
+      }
+
+      return res.json({
+        status: 200,
+        message: `Successfully found contact with id ${contactId}!`,
+        data: contact,
+      });
+    } catch (err) {
+      res.status(500).json({
+        message: 'Something went wrong',
+        error: err.message,
+      });
+    }
+  });
+
+  app.use('*', (req, res) => {
     res.status(404).json({
       message: 'Not found',
     });
