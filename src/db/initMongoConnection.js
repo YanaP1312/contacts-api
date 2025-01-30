@@ -1,0 +1,18 @@
+import mongoose from 'mongoose';
+import { getEnvVar } from '../utils/getEnvVar.js';
+import { ENV_VARS } from '../constants/env.js';
+
+export const initMongoConnection = async () => {
+  try {
+    const user = getEnvVar(ENV_VARS.MONGODB_USER);
+    const password = getEnvVar(ENV_VARS.MONGODB_PASSWORD);
+    const domain = getEnvVar(ENV_VARS.MONGODB_DOMAIN);
+    const db = getEnvVar(ENV_VARS.MONGODB_DATABASE);
+
+    const connectionURI = `mongodb+srv://${user}:${password}@${domain}/${db}?retryWrites=true&w=majority&appName=Contacts`;
+    await mongoose.connect(connectionURI);
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
+  }
+};
