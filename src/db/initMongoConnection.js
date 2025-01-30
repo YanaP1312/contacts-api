@@ -11,8 +11,10 @@ export const initMongoConnection = async () => {
 
     const connectionURI = `mongodb+srv://${user}:${password}@${domain}/${db}?retryWrites=true&w=majority&appName=Contacts`;
     await mongoose.connect(connectionURI);
+
+    console.log('Connection successfully established');
   } catch (err) {
-    console.error(err);
+    console.error('Connection issues', err);
     process.exit(1);
   }
 };
