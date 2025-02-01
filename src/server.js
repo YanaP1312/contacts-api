@@ -3,10 +3,16 @@ import pino from 'pino-http';
 import cors from 'cors';
 import { getEnvVar } from './utils/getEnvVar.js';
 import { ENV_VARS } from './constants/env.js';
-import { getContacts, getContactById } from './db/services/contacts.js';
+import contactsRouter from './routers/contacts.js';
+import { errorHandler } from './middlewares/errorHandler.js';
+import { notFoundHandler } from './middlewares/notFoundHandler.js';
+
+const PORT = getEnvVar(ENV_VARS.PORT);
 
 export const setupServer = () => {
   const app = express();
+
+  app.use(express.json());
 
   app.use(cors());
 
@@ -18,61 +24,18 @@ export const setupServer = () => {
     }),
   );
 
-  app.get('/contacts', async (req, res) => {
-    try {
-      const contacts = await getContacts();
-
-      return res.json({
-        status: 200,
-        message: 'Successfully found contacts!',
-        data: contacts,
-      });
-    } catch (err) {
-      res.status(500).json({
-        message: 'Something went wrong',
-        error: err.message,
-      });
-    }
-  });
-
-  app.get('/contacts/:contactId', async (req, res) => {
-    try {
-      const { contactId } = req.params;
-      const contact = await getContactById(contactId);
-
-      if (!contact) {
-        return res.status(404).json({
-          message: 'Contact not found',
-        });
-      }
-
-      return res.json({
-        status: 200,
-        message: `Successfully found contact with id ${contactId}!`,
-        data: contact,
-      });
-    } catch (err) {
-      res.status(500).json({
-        message: 'Something went wrong',
-        error: err.message,
-      });
-    }
-  });
-
-  app.use('*', (req, res) => {
-    res.status(404).json({
-      message: 'Not found',
+  app.get('/', (req, res) => {
+    res.json({
+      message: 'Hello World',
     });
   });
 
-  app.use((err, req, res, next) => {
-    res.status(500).json({
-      message: 'Something went wrong',
-      error: err.message,
-    });
-  });
+  app.use(contactsRouter);
 
-  const PORT = getEnvVar(ENV_VARS.PORT);
+  app.use('*', notFoundHandler);
+
+  app.use(errorHandler);
+
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
