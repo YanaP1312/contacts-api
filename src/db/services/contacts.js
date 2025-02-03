@@ -13,13 +13,14 @@ export const getAllContacts = async ({
   const skip = (page - 1) * perPage;
   const contactsQuery = ContactCollection.find();
 
-  console.log('Parsed Filter:', filter);
   if (filter.contactType) {
     contactsQuery.where('contactType').equals(filter.contactType);
   }
   if (filter.hasOwnProperty('isFavourite')) {
     contactsQuery.where('isFavourite').equals(filter.isFavourite);
   }
+
+  console.log('Mongo Query:', contactsQuery.getFilter());
 
   const [contactsCount, contacts] = await Promise.all([
     ContactCollection.find().merge(contactsQuery).countDocuments(),
