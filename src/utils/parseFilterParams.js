@@ -9,17 +9,8 @@ const parseBoolean = (string) => {
 };
 
 export const parseFilterParams = (filter) => {
-  const parsedFilter = {};
-
-  const isFavourite = parseBoolean(filter.isFavourite);
-  if (typeof isFavourite === 'boolean') {
-    parsedFilter.isFavourite = isFavourite;
-  }
-
-  const contactType = parseType(filter.contactType);
-  if (contactType) {
-    parsedFilter.contactType = contactType;
-  }
-
-  return parsedFilter;
+  return {
+    contactType: parseType(filter.type),
+    isFavourite: parseBoolean(filter.isFavourite),
+  };
 };
