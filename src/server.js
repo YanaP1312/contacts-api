@@ -12,6 +12,8 @@ const PORT = getEnvVar(ENV_VARS.PORT);
 export const setupServer = () => {
   const app = express();
 
+  app.set('json spaces', 2);
+
   app.use(express.json());
 
   app.use(cors());
