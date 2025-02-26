@@ -13,6 +13,7 @@ const contactsSchema = new Schema(
       enum: Object.values(CONTACT_TYPE),
       default: CONTACT_TYPE.PERSONAL,
     },
+    userId: { type: Schema.Types.ObjectId, ref: 'users', required: true },
   },
   { timestamps: true, versionKey: false },
 );
