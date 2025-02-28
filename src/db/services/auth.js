@@ -17,6 +17,7 @@ const resetEmailTemplate = fs
   .readFileSync(path.join(TEMPLATES_DIR_PATH, 'reset-password-email.html'))
   .toString();
 
+
 const createSession = () => ({
   accessToken: crypto.randomBytes(30).toString('base64'),
   refreshToken: crypto.randomBytes(30).toString('base64'),
@@ -81,6 +82,7 @@ export const refreshUsersSession = async ({ sessionToken, sessionId }) => {
   });
 };
 
+
 export const requestResetPasswordEmail = async (email) => {
   const user = await UserCollection.findOne({ email });
   if (!user) {
@@ -144,3 +146,4 @@ export const resetPassword = async ({ password, token }) => {
   });
   await SessionsCollection.deleteMany({ userId: user._id });
 };
+

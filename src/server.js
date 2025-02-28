@@ -9,6 +9,7 @@ import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import cookieParser from 'cookie-parser';
 import { UPLOAD_DIR } from './constants/path.js';
 
+
 const PORT = getEnvVar(ENV_VARS.PORT);
 
 export const setupServer = () => {
