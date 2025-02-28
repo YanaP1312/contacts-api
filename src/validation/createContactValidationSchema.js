@@ -9,6 +9,11 @@ export const createContactValidationSchema = Joi.object({
     )
     .required(),
   email: Joi.string().email(),
-  isFavorite: Joi.boolean(),
+  isFavorite: Joi.alternatives().try(
+    Joi.boolean(),
+    Joi.string()
+      .valid('true', 'false')
+      .custom((value) => value === 'true'),
+  ),
   contactType: Joi.string().valid(...Object.values(CONTACT_TYPE)),
 });

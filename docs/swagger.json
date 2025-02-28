@@ -28,7 +28,7 @@
     }
   ],
   "paths": {
-    "/students": {
+    "/contacts": {
       "get": {
         "tags": [
           "Contacts"
@@ -239,7 +239,7 @@
         },
         "responses": {
           "201": {
-            "description": "Creates a student",
+            "description": "Creates a contact",
             "content": {
               "application/json": {
                 "schema": {

@@ -15,7 +15,7 @@ servers:
   - url: http://localhost:3005
   - url: https://nodejs-hw-mongodb-s2km.onrender.com
 paths:
-  /students:
+  /contacts:
     get:
       $ref: ../swagger/paths/contacts/get.yaml
     post:
