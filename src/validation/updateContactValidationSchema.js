@@ -7,6 +7,6 @@ export const updateContactValidationSchema = Joi.object({
     /^(\+?[1-9]\d{0,2})?[-.\s]?(\(?\d{1,4}\)?)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/,
   ),
   email: Joi.string().email(),
-  isFavourite: Joi.boolean(),
+  isFavorite: Joi.boolean(),
   contactType: Joi.string().valid(...Object.values(CONTACT_TYPE)),
 });
