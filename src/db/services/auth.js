@@ -144,3 +144,4 @@ export const resetPassword = async ({ password, token }) => {
   });
   await SessionsCollection.deleteMany({ userId: user._id });
 };
+

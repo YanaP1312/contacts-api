@@ -10,6 +10,7 @@ import cookieParser from 'cookie-parser';
 import { UPLOAD_DIR } from './constants/path.js';
 import { swaggerDocs } from './middlewares/swaggerDocs.js';
 
+
 const PORT = getEnvVar(ENV_VARS.PORT);
 
 export const setupServer = () => {
