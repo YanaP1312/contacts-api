@@ -4,9 +4,7 @@
 
 ## 🔗 Live API
 
-Your service is available at:  
-➡️ https://nodejs-hw-mongodb-s2km.onrender.com  
-(or your custom domain if configured)
+➡️ [https://contacts-api-b5n1.onrender.com/api-docs/] 
 
 ## 🚀 Features
 
@@ -77,11 +75,13 @@ npm run docs
 
 ---
 
-🧰 API Endpoints (Examples)
+🧰 API Endpoints 
 
 🔐 Auth
 POST /auth/register
 POST /auth/login
+POST /auth/logout
+POST /auth/refresh
 POST /auth/send-reset-email
 POST /auth/reset-pwd
 
@@ -96,7 +96,7 @@ Supports:
 
 ?page=1&perPage=10
 ?sortBy=name&sortOrder=asc
-?isFavourite=true&type=personal
+?isFavourite=true&contactType=personal
 
 ---
 
