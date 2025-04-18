@@ -12,8 +12,8 @@ tags:
   - name: Contacts
     description: Operations with contacts.
 servers:
-  - url: http://localhost:3005
-  - url: https://nodejs-hw-mongodb-s2km.onrender.com
+  - url: https://contacts-api-b5n1.onrender.com
+  - url: http://localhost:3005 
 paths:
   #auth
   /auth/register:
