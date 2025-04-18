@@ -16,8 +16,8 @@ export const getAllContacts = async ({
   if (filter.contactType) {
     contactsQuery.where('contactType').equals(filter.contactType);
   }
-  if (typeof filter.isFavourite === 'boolean') {
-    contactsQuery.where('isFavourite').equals(filter.isFavourite);
+  if (typeof filter.isFavorite === 'boolean') {
+    contactsQuery.where('isFavorite').equals(filter.isFavorite);
   }
 
   const [contactsCount, contacts] = await Promise.all([
@@ -35,7 +35,8 @@ export const getAllContacts = async ({
 };
 
 export const getContactById = async (contactId, userId) => {
-  const contact = await ContactCollection.findOne({ _id: contactId, userId });
+  const contact = await ContactCollection.findById({ _id: contactId, userId });
+
   return contact;
 };
 

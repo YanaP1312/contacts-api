@@ -85,4 +85,3 @@ export const resetPasswordController = async (req, res) => {
     data: {},
   });
 };
-

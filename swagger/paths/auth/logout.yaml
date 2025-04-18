@@ -1,0 +1,17 @@
+tags:
+  - Auth
+summary: User logout
+operationId: logoutUser
+description: 'Logs out the user and removes session data from cookies and database'
+security:
+  - bearerAuth: []
+responses:
+  '204':
+    description: 'Successfully logged out'
+  '401':
+    $ref: ../../components/responses/401.yaml
+    description: |
+      Unauthorized error. In this specific case:
+      - data.message: 'Password is incorrect'
+  '500':
+    $ref: '../../components/responses/500.yaml'

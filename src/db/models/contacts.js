@@ -6,7 +6,7 @@ const contactsSchema = new Schema(
     name: { type: String, required: true },
     phoneNumber: { type: String, required: true },
     email: { type: String },
-    isFavourite: { type: Boolean, default: false },
+    isFavorite: { type: Boolean, default: false },
     contactType: {
       type: String,
       required: true,
@@ -14,7 +14,8 @@ const contactsSchema = new Schema(
       default: CONTACT_TYPE.PERSONAL,
     },
     userId: { type: Schema.Types.ObjectId, ref: 'users', required: true },
-    photo: { type: String, default: null, required: false },
+    photo: { type: String },
+
   },
   { timestamps: true, versionKey: false },
 );

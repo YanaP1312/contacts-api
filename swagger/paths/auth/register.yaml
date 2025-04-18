@@ -1,0 +1,67 @@
+tags:
+  - Auth
+summary: Register User
+operationId: registerUser
+description: 'Register user'
+security: []
+requestBody:
+  description: 'User credentials'
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - email
+          - password
+        properties:
+          email:
+            type: string
+            example: alex_hofman@gmail.com
+          password:
+            type: string
+            example: examplePsw123!
+          name:
+            type: string
+            example: Alex Hofman
+responses:
+  '201':
+    description: 'User successfully registered'
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: 'Successfully registered a user!'
+            data:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Alex Hofman
+                email:
+                  type: string
+                  example: alex_hofman@gmail.com
+                accessToken:
+                  type: string
+                  example: 'abc123xgf4b62bYVrd53s565nt225'
+  '409':
+    description: 'Email already in use'
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 409
+            message:
+              type: string
+              example: 'Email in use'
+  '500':
+    $ref: '../../components/responses/500.yaml'
